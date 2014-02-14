@@ -1,0 +1,10 @@
+.settings/*
+.project
+service/.settings
+service/.project
+service/.classpath
+service/target/*
+war/.settings/*
+war/.project
+war/.classpath
+war/target/

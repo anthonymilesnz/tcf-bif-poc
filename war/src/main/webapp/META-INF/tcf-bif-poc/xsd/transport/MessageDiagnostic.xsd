@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:md="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnostic" 
+					targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnostic">
+
+	<xsd:element name="MessageDiagnostic" type="md:MessageDiagnostic" />
+
+	<xsd:complexType name="MessageDiagnostic">
+		<!-- A URI reference to the SOAP header containing the Message Diagnostic Header information -->
+		<xsd:attribute name="messageDiagnosticHeaderReference" type="xsd:anyURI"/>
+	</xsd:complexType>
+</xsd:schema>

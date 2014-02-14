@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="tcf-bif-cxf-x509-profile" resourceRoot="" soapui-version="4.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="B2BEndpointBinding" type="wsdl" bindingName="{http://www.tcf.org.nz/v0.0.1/bif/getVersion}B2BEndpointBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/my-stuff-n8500x/development/eclipse/eclipse-workspace/chorus-r5/tcf-bif-poc/cxf-x509-profile/war/src/main/webapp/META-INF/tcf-bif-poc/bif-b2b-get-version/bif-b2b-get-version.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\my-stuff-n8500x\development\eclipse\eclipse-workspace\chorus-r5\tcf-bif-poc\cxf-x509-profile\war\src\main\webapp\META-INF\tcf-bif-poc\bif-b2b-get-version\bif-b2b-get-version.wsdl"><con:part><con:url>file:\C:\my-stuff-n8500x\development\eclipse\eclipse-workspace\chorus-r5\tcf-bif-poc\cxf-x509-profile\war\src\main\webapp\META-INF\tcf-bif-poc\bif-b2b-get-version\bif-b2b-get-version.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="bif-b2b-get-version" targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:ver="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:diag="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnostic" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnostic" schemaLocation="../xsd/transport/MessageDiagnostic.xsd"/>
+      <xsd:import namespace="http://www.tcf.org.nz/v0.0.1/bif/getVersion" schemaLocation="../xsd/version/GetServiceVersionDetails.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <!--===========================================================================================================-->
+  <!--Acquire back-end [SOAP Action] version details for a service. Allows 
+		 customer to confirm the version of the service interface that will process
+		 their request for the required SOAP action given. 
+		 See [GetServiceVersionDetails] XSD complex type for details 
+		 of the required input parameters and corresponding return data.-->
+  <!--===========================================================================================================-->
+  <wsdl:message name="GetServiceVersionDetailsRequest">
+    <wsdl:part name="GetServiceVersionDetailsRequest" element="ver:GetServiceVersionDetailsRequest"/>
+  </wsdl:message>
+  <!--===========================================================================================================-->
+  <wsdl:message name="GetServiceVersionDetailsResponse">
+    <wsdl:part name="GetServiceVersionDetailsResponse" element="ver:GetServiceVersionDetailsResponse"/>
+  </wsdl:message>
+  <!--===========================================================================================================-->
+  <wsdl:message name="MessageDiagnostic">
+    <wsdl:part name="MessageDiagnostic" element="diag:MessageDiagnostic"/>
+  </wsdl:message>
+  <!--===========================================================================================================-->
+  <wsdl:portType name="B2BEndpointPortType">
+    <wsdl:operation name="GetServiceVersionDetails">
+      <wsdl:input name="GetServiceVersionDetailsRequest" message="ver:GetServiceVersionDetailsRequest"/>
+      <wsdl:output name="GetServiceVersionDetailsResponse" message="ver:GetServiceVersionDetailsResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <!--=================================================================================================================================-->
+  <wsp:Policy wsu:Id="AsymmetricX509MutualAuthentication">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:AsymmetricBinding>
+          <wsp:Policy>
+            <sp:InitiatorToken>
+              <wsp:Policy>
+                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Always">
+                  <wsp:Policy>
+                    <sp:WssX509V3Token10/>
+                  </wsp:Policy>
+                </sp:X509Token>
+              </wsp:Policy>
+            </sp:InitiatorToken>
+            <sp:RecipientToken>
+              <wsp:Policy>
+                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Always">
+                  <wsp:Policy>
+                    <sp:WssX509V3Token10/>
+                    <sp:RequireIssuerSerialReference/>
+                  </wsp:Policy>
+                </sp:X509Token>
+              </wsp:Policy>
+            </sp:RecipientToken>
+            <sp:OnlySignEntireHeadersAndBody/>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256/>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+          </wsp:Policy>
+        </sp:AsymmetricBinding>
+        <sp:Wss11>
+          <wsp:Policy>
+            <sp:MustSupportRefIssuerSerial/>
+          </wsp:Policy>
+        </sp:Wss11>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <!--=================================================================================================================================-->
+  <wsp:Policy wsu:Id="TcfBifWebServicesIndustryFrameworkInputBindingPolicy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts>
+          <sp:Body/>
+          <sp:Header Namespace="http://www.tcf.org.nz/v0.0.1/bif/message"/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="TcfBifWebServicesIndustryFrameworkOutputBindingPolicy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts>
+          <sp:Body/>
+          <sp:Header Namespace="http://www.tcf.org.nz/v0.0.1/bif/message"/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <!--=================================================================================================================================-->
+  <wsdl:binding name="B2BEndpointBinding" type="ver:B2BEndpointPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:PolicyReference URI="#AsymmetricX509MutualAuthentication"/>
+    <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
+    <wsdl:operation name="GetServiceVersionDetails">
+      <soap:operation soapAction="GetServiceVersionDetails" style="document"/>
+      <wsdl:input>
+        <wsp:PolicyReference URI="#TcfBifWebServicesIndustryFrameworkInputBindingPolicy"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#TcfBifWebServicesIndustryFrameworkOutputBindingPolicy"/>
+        <soap:body use="literal"/>
+        <soap:header message="ver:MessageDiagnostic" part="MessageDiagnostic" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
+  </wsdl:binding>
+  <wsdl:service name="B2BEndpointService">
+    <wsdl:port name="B2BEndpointPortType" binding="ver:B2BEndpointBinding">
+      <soap:address location="http://www.tcf.org.nz/v0.0.1/bif/getVersion"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\my-stuff-n8500x\development\eclipse\eclipse-workspace\chorus-r5\tcf-bif-poc\cxf-x509-profile\war\src\main\webapp\META-INF\tcf-bif-poc\xsd\transport\MessageDiagnostic.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnostic" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:md="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnostic">
+  <xsd:element name="MessageDiagnostic" type="md:MessageDiagnostic"/>
+  <xsd:complexType name="MessageDiagnostic">
+    <!--A URI reference to the SOAP header containing the Message Diagnostic Header information-->
+    <xsd:attribute name="messageDiagnosticHeaderReference" type="xsd:anyURI"/>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\my-stuff-n8500x\development\eclipse\eclipse-workspace\chorus-r5\tcf-bif-poc\cxf-x509-profile\war\src\main\webapp\META-INF\tcf-bif-poc\xsd\version\GetServiceVersionDetails.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ver="http://www.tcf.org.nz/v0.0.1/bif/getVersion">
+  <xsd:element name="GetServiceVersionDetailsRequest" type="ver:GetServiceVersionDetailsRequest"/>
+  <xsd:element name="GetServiceVersionDetailsResponse" type="ver:GetServiceVersionDetailsResponse"/>
+  <xsd:complexType name="GetServiceVersionDetailsRequest">
+    <xsd:sequence>
+      <xsd:element name="soapAction" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="GetServiceVersionDetailsResponse">
+    <xsd:sequence>
+      <xsd:element name="soapAction" type="xsd:string"/>
+      <xsd:element name="currentServiceVersion" type="xsd:string"/>
+      <!--Customer details acquired from SOAP Header-->
+      <xsd:element name="customerVersion" type="xsd:string"/>
+      <xsd:element name="customerVersionExpiry" type="xsd:string"/>
+      <xsd:element name="customerVersionWorksWithCurrentVersion" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:20080/tcf-bif-cxf-x509-profile/b2bEndpointPortTypeImpl/getServiceVersion</con:endpoint></con:endpoints><con:operation isOneWay="false" action="GetServiceVersionDetails" name="GetServiceVersionDetails" bindingOperationName="GetServiceVersionDetails" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="client-security"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:20080/tcf-bif-cxf-x509-profile/b2bEndpointPortTypeImpl/getServiceVersion</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:get="http://www.tcf.org.nz/v0.0.1/bif/getVersion">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <get:GetServiceVersionDetailsRequest>
+         <soapAction>queryPlace</soapAction>
+      </get:GetServiceVersionDetailsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetServiceVersionDetails"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:requirements/><con:properties/><con:wssContainer><con:crypto><con:source>C:/my-stuff-n8500x/development/eclipse/eclipse-workspace/chorus-r5/tcf-bif-poc/cxf-x509-profile/certs-keys/clientKeystore.jks</con:source><con:password>cspass</con:password><con:type>KEYSTORE</con:type></con:crypto><con:outgoing><con:name>client-security</con:name><con:entry type="Signature" username="myclientkey" password="ckpass"><con:configuration><crypto>clientKeystore.jks</crypto><keyIdentifierType>1</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2000/09/xmldsig#rsa-sha1</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/2001/10/xml-exc-c14n#</signatureCanonicalization><useSingleCert>true</useSingleCert><digestAlgorithm>http://www.w3.org/2000/09/xmldsig#sha1</digestAlgorithm></con:configuration></con:entry></con:outgoing></con:wssContainer><con:databaseConnectionContainer/><con:reporting><con:reportTemplates/><con:xmlTemplates/><con:parameters/></con:reporting><con:sensitiveInformation/></con:soapui-project>

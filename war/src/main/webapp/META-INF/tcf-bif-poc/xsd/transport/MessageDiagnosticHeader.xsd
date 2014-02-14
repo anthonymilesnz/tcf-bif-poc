@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdh="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader" 
+					targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader">
+
+	<xsd:element name="MessageDiagnosticHeader" type="mdh:MessageDiagnosticHeader" />
+
+	<xsd:complexType name="MessageDiagnosticHeader">
+		<xsd:sequence>
+			<!-- Diagnostic header ID; the ID of this diagnostic header ID whenever a request/response/notification is sent, unique for any diagnostic header sent -->
+			<xsd:element name="diagnosticHeaderId" type="xsd:string"/>
+			<!-- The conversation ID that which will chain all messages relating to a long running transaction -->
+			<xsd:element name="conversationId" type="xsd:string" />
+			<!-- The correlation ID that which will correlate a request/response/notification, from a previously sent diagnosticHeaderId -->
+			<xsd:element name="correlationId" type="xsd:string" />
+			<!-- The date time of this acknowledgement -->
+			<xsd:element name="createdDateTime" type="xsd:string" />
+			<!-- The sending business partner -->
+			<xsd:element name="fromPartyId" type="xsd:string" />
+			<!-- The receiving business partner -->
+			<xsd:element name="toPartyId" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
