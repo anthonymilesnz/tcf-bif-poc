@@ -1,0 +1,7 @@
+
+Naming - Camel case
+
+bif-b2b-get-version - 
+WSDL:Definitions: Place the name abbreviations into a standard document so that the names are aligned across all definitions.
+
+
