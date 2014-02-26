@@ -16,13 +16,13 @@ public class B2BEndpointPortTypeImpl implements B2BEndpointPortType {
 	private static final String CURRENT_SERVICE_DEFAULT_VERSION = "v2.0";
 
 	public GetServiceVersionDetailsResponse getServiceVersionDetails(GetServiceVersionDetailsRequest parameters) {
-		GetServiceVersionDetailsResponse getServiceVersionDetailsResponse = new GetServiceVersionDetailsResponse();
+            GetServiceVersionDetailsResponse getServiceVersionDetailsResponse = new GetServiceVersionDetailsResponse();
 		getServiceVersionDetailsResponse.setCurrentServiceVersion(CURRENT_SERVICE_DEFAULT_VERSION);
 		getServiceVersionDetailsResponse.setCustomerVersion(CUSTOMER_DEFAULT_VERSION);
 		getServiceVersionDetailsResponse.setCustomerVersionExpiry(DEFAULT_EXPIRY);
 		getServiceVersionDetailsResponse.setCustomerVersionWorksWithCurrentVersion(Boolean.TRUE);
 		getServiceVersionDetailsResponse.setSoapAction(parameters.getSoapAction());
-		
+            
 		return getServiceVersionDetailsResponse;
 	}
 	

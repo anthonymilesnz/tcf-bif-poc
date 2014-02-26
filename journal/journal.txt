@@ -5,3 +5,15 @@ bif-b2b-get-version -
 WSDL:Definitions: Place the name abbreviations into a standard document so that the names are aligned across all definitions.
 
 
+SOAPUi Project set up:
+Deploy the war in your favourate app server.  I'm using Tomcat 7.0.41
+Fire up SOAPUI and point it at: http://localhost:8084/b2bEndpointPortTypeImpl?wsdl
+It should create a B2BEndpointBinding Interface withe a GetServiceVersionDetails service.
+
+Configure the project with WS-Security Config:
+1. Keystore - point at the client keystore and add password
+2. Add an outgoing config and add a Signature WSS Entry.
+3. In the Sig WSS Entry, select the keystore, with the correct alias.  Enter the password for the alias.  Key Id Type is Binary Security Token. Tick Use Single Certificate.
+4. Sig Algo = xmldsig#rsa-sha1, Sig Can = xml-exc-c14n#, Dig Algo = xmldsig#sha1
+
+
