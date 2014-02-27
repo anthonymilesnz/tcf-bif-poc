@@ -16,4 +16,6 @@ Configure the project with WS-Security Config:
 3. In the Sig WSS Entry, select the keystore, with the correct alias.  Enter the password for the alias "ckpass".  Key Id Type is Binary Security Token. Tick Use Single Certificate.
 4. Sig Algo = xmldsig#rsa-sha1, Sig Can = xml-exc-c14n#, Dig Algo = xmldsig#sha1
 
+TODO: SOAPFault
+TODO: UC002:Notifications
 
