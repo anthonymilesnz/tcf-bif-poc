@@ -13,9 +13,35 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>apache-log4j-extras</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 		</dependency>
 	</dependencies>
 
@@ -40,7 +66,7 @@
 							<goal>wsdl2java</goal>
 						</goals>
 						<configuration>
-							<sourceRoot>${basedir}/target/wsdl/generated-sources</sourceRoot>
+							<sourceRoot>generated/src/main/java/apache-cxf</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
 									<wsdl>../war/src/main/webapp/META-INF/tcf-bif-poc/bif-b2b-get-version/bif-b2b-get-version.wsdl/</wsdl>
@@ -50,6 +76,26 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>xmlbeans-maven-plugin</artifactId>
+				<version>2.3.3</version>
+				<executions>
+					<execution>
+						<id>compile-schemas</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>xmlbeans</goal>
+						</goals>
+					</execution>
+				</executions>
+				<inherited>true</inherited>
+				<configuration>
+					<schemaDirectory>src/test/resources/soap-envelope</schemaDirectory>
+					<sourceGenerationDirectory>generated/src/main/java/xmlbeans/</sourceGenerationDirectory>
+					<outputJar>generated/bin/xmlbeans/jar/soap-xsd-xml-types-${project.version}.jar</outputJar>
+				</configuration>
 			</plugin>
 		</plugins>
 		<!-- Name of the generated WAR file -->

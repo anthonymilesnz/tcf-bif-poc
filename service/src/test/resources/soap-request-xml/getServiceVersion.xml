@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:get="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:mdh="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader">
+	<soapenv:Header>
+		<mdh:messageDiagnosticHeader URI="#Id-1121679804">
+			<diagnosticHeaderId>2255ee03-1c25-4a47-9aef-010dabcc9f20</diagnosticHeaderId>
+			<createdDateTime>Fri Feb 14 14:24:07 NZDT 2014</createdDateTime>
+			<fromPartyId>RSP_A</fromPartyId>
+			<toPartyId>LFC_B</toPartyId>
+		</mdh:messageDiagnosticHeader>
+	</soapenv:Header>
+	<soapenv:Body mdh:Id="Id-1121679804">
+		<get:GetServiceVersionDetailsRequest>
+			<soapAction>queryPlace</soapAction>
+		</get:GetServiceVersionDetailsRequest>
+	</soapenv:Body>
+</soapenv:Envelope>

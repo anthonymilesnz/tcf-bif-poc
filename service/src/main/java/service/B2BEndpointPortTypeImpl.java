@@ -4,9 +4,7 @@ import javax.jws.WebService;
 import nz.org.tcf.v0_0_1.bif.getversion.B2BEndpointPortType;
 import nz.org.tcf.v0_0_1.bif.getversion.GetServiceVersionDetailsRequest;
 import nz.org.tcf.v0_0_1.bif.getversion.GetServiceVersionDetailsResponse;
-import nz.org.tcf.v0_0_1.bif.messagediagnostic.MessageDiagnostic;
 
-@SuppressWarnings("restriction")
 @WebService(targetNamespace = "http://www.tcf.org.nz/v0.0.1/bif/getVersion", portName="B2BEndpointPortType", serviceName="B2BEndpointService", endpointInterface="nz.org.tcf.v0_0_1.bif.getversion.B2BEndpointPortType")
 
 public class B2BEndpointPortTypeImpl implements B2BEndpointPortType {
@@ -24,10 +22,5 @@ public class B2BEndpointPortTypeImpl implements B2BEndpointPortType {
 		getServiceVersionDetailsResponse.setSoapAction(parameters.getSoapAction());
 		
 		return getServiceVersionDetailsResponse;
-	}
-	
-	private MessageDiagnostic buildMessageDiagnostic() {
-		
-		return null;
 	}
 }

@@ -3,27 +3,13 @@
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 	
-	<appender name="tcfBifPoc" class="org.apache.log4j.rolling.RollingFileAppender">
-		<param name="file" value="webapps/logs/tcf-bif-poc/tcf-bif-poc.log" />
+	<appender name="tcfBifPocLog" class="org.apache.log4j.rolling.RollingFileAppender">
+		<param name="file" value="/tmp/log/tcf-bif-poc/tcf-bif-poc.log" />
 		<param name="append" value="true" />
 		<param name="encoding" value="UTF-8" />
 		
 		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-			<param name="FileNamePattern" value="var/log/tomcat/tcf-bif-poc/tcf-bif-poc.%d{yyyyMMdd}.log" />
-		</rollingPolicy>
-
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %p [%c] - %m %n" />
-		</layout>
-	</appender>
-	
-	<appender name="loggingPoints" class="org.apache.log4j.rolling.RollingFileAppender">
-		<param name="file" value="var/log/tomcat/tcf-bif-poc/tcf-bif-poc.log" />
-		<param name="append" value="true" />
-		<param name="encoding" value="UTF-8" />
-		
-		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-			<param name="FileNamePattern" value="var/log/tomcat/tcf-bif-poc/tcf-bif-poc.log.%d{yyyyMMdd}.log" />
+			<param name="FileNamePattern" value="/tmp/log/tcf-bif-poc/tcf-bif-poc.log.%d{yyyyMMdd}.log" />
 		</rollingPolicy>
 
 		<layout class="org.apache.log4j.PatternLayout">
@@ -37,10 +23,15 @@
 			<param name="ConversionPattern" value="%d %p [%c] - %m %n" />
 		</layout>
 	</appender>
-		
+	
+	<logger name="service">
+		<level value="debug"/>
+		<appender-ref ref="tcfBifPocLog" />
+	</logger>
+	
 	<root>
-		<priority value ="debug" />
+		<priority value ="info" />
 		<appender-ref ref="stdout" />
 	</root>
-
+	
 </log4j:configuration>

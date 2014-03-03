@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdh="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader" 
-					targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader">
+					targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader" elementFormDefault="unqualified">
+
+	<!-- Global variable to be injected into a SOAP body top level node to designate a URI reference to a MessageDiagnosticHeader construct -->
+	<xsd:attribute name="Id" type="xsd:ID"/>
 
 	<xsd:element name="MessageDiagnosticHeader" type="mdh:MessageDiagnosticHeader" />
 
 	<xsd:complexType name="MessageDiagnosticHeader">
 		<xsd:sequence>
 			<!-- Diagnostic header ID; the ID of this diagnostic header ID whenever a request/response/notification is sent, unique for any diagnostic header sent -->
-			<xsd:element name="diagnosticHeaderId" type="xsd:string"/>
+			<xsd:element name="diagnosticHeaderId" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
 			<!-- The conversation ID that which will chain all messages relating to a long running transaction -->
-			<xsd:element name="conversationId" type="xsd:string" />
+			<xsd:element name="conversationId" type="xsd:string" maxOccurs="1" nillable="false"/>
 			<!-- The correlation ID that which will correlate a request/response/notification, from a previously sent diagnosticHeaderId -->
-			<xsd:element name="correlationId" type="xsd:string" />
+			<xsd:element name="correlationId" type="xsd:string" maxOccurs="1" nillable="false"/>
 			<!-- The date time of this acknowledgement -->
-			<xsd:element name="createdDateTime" type="xsd:string" />
+			<xsd:element name="createdDateTime" type="xsd:string" maxOccurs="1" nillable="false"/>
 			<!-- The sending business partner -->
-			<xsd:element name="fromPartyId" type="xsd:string" />
+			<xsd:element name="fromPartyId" type="xsd:string" maxOccurs="1" nillable="false"/>
 			<!-- The receiving business partner -->
-			<xsd:element name="toPartyId" type="xsd:string" />
+			<xsd:element name="toPartyId" type="xsd:string" maxOccurs="1" nillable="false"/>
 		</xsd:sequence>
+		<xsd:attribute name="URI" type="xsd:anyURI" />
+		<xsd:attribute name="SequenceNumber" type="xsd:string" />
 	</xsd:complexType>
 </xsd:schema>
