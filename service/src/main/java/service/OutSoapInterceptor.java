@@ -38,7 +38,7 @@ public class OutSoapInterceptor extends AbstractSoapInterceptor {
     }
 	
 	private void buildMessageDiagnosticHeader(SOAPHeader soapHeader, SoapMessage soapMessage) throws SOAPException {
-		QName qname = new QName("http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader", "messageDiagnosticHeader");
+		QName qname = new QName("http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader", "messageDiagnosticHeader", "mdh");
         SOAPHeaderElement soapHeaderElement = soapHeader.addHeaderElement(qname);
         soapHeaderElement.setActor(SOAPConstants.URI_SOAP_ACTOR_NEXT);
         soapHeaderElement.addChildElement("diagnosticHeaderId").addTextNode(java.util.UUID.randomUUID().toString());
@@ -46,6 +46,9 @@ public class OutSoapInterceptor extends AbstractSoapInterceptor {
         soapHeaderElement.addChildElement("createdDateTime").addTextNode(new DateTime().toString());
         soapHeaderElement.addChildElement("toPartyId").addTextNode((String) soapMessage.getExchange().get("fromPartyId"));
         soapHeaderElement.addChildElement("fromPartyId").addTextNode((String) soapMessage.getExchange().get("toPartyId"));
+        String uuidSecurityId = java.util.UUID.randomUUID().toString();
+        soapHeaderElement.addAttribute(new QName("http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader", "URI", "mdh"), "#" + uuidSecurityId);
+        soapMessage.getContent(SOAPMessage.class).getSOAPBody().addAttribute(new QName("http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader", "Id", "mdh"), uuidSecurityId);
 	}
 
 	private void handleHeaders(SoapMessage soapMessage) {

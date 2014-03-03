@@ -2,9 +2,6 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdh="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader" 
 					targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader" elementFormDefault="unqualified">
 
-	<!-- Global variable to be injected into a SOAP body top level node to designate a URI reference to a MessageDiagnosticHeader construct -->
-	<xsd:attribute name="Id" type="xsd:ID"/>
-
 	<xsd:element name="MessageDiagnosticHeader" type="mdh:MessageDiagnosticHeader" />
 
 	<xsd:complexType name="MessageDiagnosticHeader">
