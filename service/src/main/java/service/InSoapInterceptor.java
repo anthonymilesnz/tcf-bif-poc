@@ -5,8 +5,6 @@ import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPHeaderElement;
 import javax.xml.soap.SOAPMessage;
-import javax.xml.soap.Text;
-
 import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.binding.soap.interceptor.AbstractSoapInterceptor;
 import org.apache.cxf.interceptor.Fault;
@@ -25,6 +23,7 @@ public class InSoapInterceptor extends AbstractSoapInterceptor {
 	
 	public void handleMessage(SoapMessage soapMessage) throws Fault {
 		try {
+			boolean messageDiagnosticHeaderExists = false;
 			SOAPHeader soapHeader = soapMessage.getContent(SOAPMessage.class).getSOAPHeader();
 			@SuppressWarnings("unchecked")
 			Iterator<SOAPHeaderElement> soapHeaderElements = soapHeader.examineAllHeaderElements();
@@ -40,6 +39,7 @@ public class InSoapInterceptor extends AbstractSoapInterceptor {
 		            		LOG.debug("[soap header node local name]\n" + node.getLocalName());
 		            		LOG.debug("[soap header node text content]\n" + node.getTextContent());
 		            		if(node.getParentNode().getLocalName().equals("messageDiagnosticHeader")) {
+		            			messageDiagnosticHeaderExists = true;
 		            			if(node.getLocalName().equals("diagnosticHeaderId")) {
 		            				LOG.debug("[found 'diagnosticHeader', adding to cxf exchange]");
 		            				soapMessage.getExchange().put(node.getLocalName(), node.getTextContent());
@@ -56,6 +56,7 @@ public class InSoapInterceptor extends AbstractSoapInterceptor {
 		            	}
 		            }
 		      }
+		      if(!messageDiagnosticHeaderExists) throw new Fault(new SOAPException("[header 'messageDiagnosticHeader' not found]"));
 		} catch (SOAPException exception) {
 			LOG.error("[error executing InSoapInterceptor]");
 			LOG.error(exception, exception);

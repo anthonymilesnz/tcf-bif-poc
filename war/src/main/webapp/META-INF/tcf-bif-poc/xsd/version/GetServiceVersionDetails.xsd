@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ver="http://www.tcf.org.nz/v0.0.1/bif/getVersion"
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ver="http://www.tcf.org.nz/v0.0.1/bif/getVersion"
 	targetNamespace="http://www.tcf.org.nz/v0.0.1/bif/getVersion">
 
-	<xsd:element name="GetServiceVersionDetailsRequest" type="ver:GetServiceVersionDetailsRequest"/>
-	<xsd:element name="GetServiceVersionDetailsResponse" type="ver:GetServiceVersionDetailsResponse"/>
-	
+	<xsd:element name="GetServiceVersionDetailsRequest" type="ver:GetServiceVersionDetailsRequest" />
+	<xsd:element name="GetServiceVersionDetailsResponse" type="ver:GetServiceVersionDetailsResponse" />
+
 	<xsd:complexType name="GetServiceVersionDetailsRequest">
 		<xsd:sequence>
 			<xsd:element name="soapAction" type="xsd:string" />
 		</xsd:sequence>
 	</xsd:complexType>
-	
+
 	<xsd:complexType name="GetServiceVersionDetailsResponse">
 		<xsd:sequence>
 			<xsd:element name="soapAction" type="xsd:string" />
@@ -21,5 +22,5 @@
 			<xsd:element name="customerVersionWorksWithCurrentVersion" type="xsd:boolean" />
 		</xsd:sequence>
 	</xsd:complexType>
-	
+
 </xsd:schema>

@@ -14,11 +14,9 @@
 
 	<wsdl:types>
 		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-			<xsd:import namespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader"
-				schemaLocation="../xsd/transport/MessageDiagnosticHeader.xsd" />
-			<xsd:import namespace="http://www.tcf.org.nz/v0.0.1/bif/getVersion"
-				schemaLocation="../xsd/version/GetServiceVersionDetails.xsd" />
-		</xsd:schema>
+			<xsd:import namespace="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader" schemaLocation="../xsd/transport/MessageDiagnosticHeader.xsd" />
+			<xsd:import namespace="http://www.tcf.org.nz/v0.0.1/bif/getVersion" schemaLocation="../xsd/version/GetServiceVersionDetails.xsd" />
+	      </xsd:schema>
 	</wsdl:types>
 
 	<!-- =========================================================================================================== -->

@@ -141,17 +141,34 @@
       <xsd:element name="customerVersionWorksWithCurrentVersion" type="xsd:boolean"/>
     </xsd:sequence>
   </xsd:complexType>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:20080/tcf-bif-cxf-x509-profile/b2bEndpointPortTypeImpl/getServiceVersion</con:endpoint></con:endpoints><con:operation isOneWay="false" action="GetServiceVersionDetails" name="GetServiceVersionDetails" bindingOperationName="GetServiceVersionDetails" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GetServiceVersionDetailsRequest" outgoingWss="client-security"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:20080/tcf-bif-cxf-x509-profile/b2bEndpointPortTypeImpl/getServiceVersion</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:get="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:mdh="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:20080/tcf-bif-cxf-x509-profile/b2bEndpointPortTypeImpl/getServiceVersion</con:endpoint></con:endpoints><con:operation isOneWay="false" action="GetServiceVersionDetails" name="GetServiceVersionDetails" bindingOperationName="GetServiceVersionDetails" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GetServiceVersionDetailsRequestTriggerFault" outgoingWss="client-security"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:20080/tcf-bif-cxf-x509-profile/b2bEndpointPortTypeImpl/getServiceVersion</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:get="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:mdh="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader">
    <soapenv:Header>
-      <mdh:messageDiagnosticHeader URI="#Id-1121679804" sequenceNumber="000000012">
+      <mdh:messageDiagnosticHeader URI="#89c73bee-e168-433b-85f5-1383387ae6da">
          <diagnosticHeaderId>2255ee03-1c25-4a47-9aef-010dabcc9f20</diagnosticHeaderId>
          <conversationId>09e9294a-baa4-4aa3-99f3-98f7c96d8fa1</conversationId>
-         <createdDateTime>Fri Feb 14 14:24:07 NZDT 2014</createdDateTime>
+         <createdDateTime>2014-03-04T13:45:28.944+13:00</createdDateTime>
+         <conversationId>123</conversationId>
          <fromPartyId>RSP_A</fromPartyId>
          <toPartyId>LFC_B</toPartyId>
       </mdh:messageDiagnosticHeader>
    </soapenv:Header>
-   <soapenv:Body mdh:Id="Id-1121679804">
+   <soapenv:Body mdh:Id="89c73bee-e168-433b-85f5-1383387ae6da">
+      <get:GetServiceVersionDetailsRequest>
+         <soapAction>TRIGGER_SAMPLE_FAULT</soapAction>
+      </get:GetServiceVersionDetailsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetServiceVersionDetails"/><con:wsrmConfig version="1.2"/></con:call><con:call name="GetServiceVersionDetailsRequestQueryPlace"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:20080/tcf-bif-cxf-x509-profile/b2bEndpointPortTypeImpl/getServiceVersion</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:get="http://www.tcf.org.nz/v0.0.1/bif/getVersion" xmlns:mdh="http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader">
+   <soapenv:Header>
+      <mdh:messageDiagnosticHeader URI="#89c73bee-e168-433b-85f5-1383387ae6da">
+         <diagnosticHeaderId>2255ee03-1c25-4a47-9aef-010dabcc9f20</diagnosticHeaderId>
+         <conversationId>09e9294a-baa4-4aa3-99f3-98f7c96d8fa1</conversationId>
+         <createdDateTime>2014-03-04T13:45:28.944+13:00</createdDateTime>
+         <conversationId>123</conversationId>
+         <fromPartyId>RSP_A</fromPartyId>
+         <toPartyId>LFC_B</toPartyId>
+      </mdh:messageDiagnosticHeader>
+   </soapenv:Header>
+   <soapenv:Body mdh:Id="89c73bee-e168-433b-85f5-1383387ae6da">
       <get:GetServiceVersionDetailsRequest>
          <soapAction>queryPlace</soapAction>
       </get:GetServiceVersionDetailsRequest>

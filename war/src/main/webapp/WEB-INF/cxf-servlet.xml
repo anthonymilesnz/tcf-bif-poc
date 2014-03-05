@@ -29,6 +29,7 @@
 
 	<bean id="InSoapInterceptor" class="service.InSoapInterceptor" />
 	<bean id="OutSoapInterceptor" class="service.OutSoapInterceptor" />
+	<bean id="OutSoapFaultInterceptor" class="service.OutSoapFaultInterceptor" />
 	
 	<cxf:bus>
 		<cxf:inInterceptors>
@@ -37,6 +38,9 @@
 		<cxf:outInterceptors>
 			<ref bean="OutSoapInterceptor" />
 		</cxf:outInterceptors>
+		<cxf:outFaultInterceptors>
+			<ref bean="OutSoapFaultInterceptor" />
+		</cxf:outFaultInterceptors>
 	</cxf:bus>
 
 </beans>
