@@ -27,8 +27,7 @@ public class OutSoapInterceptor extends AbstractSoapInterceptor {
 	
 	public void handleMessage(SoapMessage soapMessage) throws Fault {
 		try {
-			SOAPHeader soapHeader = soapMessage.getContent(SOAPMessage.class).getSOAPHeader();
-			buildMessageDiagnosticHeader(soapHeader, soapMessage);
+			buildMessageDiagnosticHeader(soapMessage);
 			handleHeaders(soapMessage);
 		} catch (SOAPException exception) {
 			LOG.error("[error executing InSoapInterceptor]");
@@ -37,9 +36,9 @@ public class OutSoapInterceptor extends AbstractSoapInterceptor {
 		}
     }
 	
-	private void buildMessageDiagnosticHeader(SOAPHeader soapHeader, SoapMessage soapMessage) throws SOAPException {
+	private void buildMessageDiagnosticHeader(SoapMessage soapMessage) throws SOAPException {
 		QName qname = new QName("http://www.tcf.org.nz/v0.0.1/bif/MessageDiagnosticHeader", "messageDiagnosticHeader", "mdh");
-        SOAPHeaderElement soapHeaderElement = soapHeader.addHeaderElement(qname);
+        SOAPHeaderElement soapHeaderElement = soapMessage.getContent(SOAPMessage.class).getSOAPHeader().addHeaderElement(qname);
         soapHeaderElement.setActor(SOAPConstants.URI_SOAP_ACTOR_NEXT);
         soapHeaderElement.addChildElement("diagnosticHeaderId").addTextNode(java.util.UUID.randomUUID().toString());
         soapHeaderElement.addChildElement("correlationId").addTextNode((String) soapMessage.getExchange().get("diagnosticHeaderId"));
