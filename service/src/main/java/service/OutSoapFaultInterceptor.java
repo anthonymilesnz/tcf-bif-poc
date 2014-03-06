@@ -25,6 +25,7 @@ public class OutSoapFaultInterceptor extends AbstractSoapInterceptor {
 	public void handleMessage(SoapMessage soapMessage) throws Fault {
 		LOG.debug("[processing in OutSoapFaultInterceptor]");
 		try {
+			soapMessage.getContent(SOAPMessage.class).getSOAPHeader().removeChild(soapMessage.getContent(SOAPMessage.class).getSOAPHeader().getFirstChild());
 			buildMessageDiagnosticHeader(soapMessage);
 		} catch (Exception exception) {
 			LOG.error("[error executing OutSoapFaultInterceptor]");
